@@ -90,10 +90,40 @@
 /*!************************!*\
   !*** ./src/js/main.js ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
 
+window.addEventListener("DOMContentLoaded", () => {
+  const slider = new _modules_slider__WEBPACK_IMPORTED_MODULE_0__["default"](".page");
+  slider.render();
+});
+
+/***/ }),
+
+/***/ "./src/js/modules/slider.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/slider.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Slider; });
+class Slider {
+  constructor(page, btns) {
+    this.page = document.querySelector(page);
+    this.slides = this.page.children;
+    this.btns = document.querySelectorAll(btns);
+  }
+  render() {
+    console.log(this.page, this.slides);
+  }
+}
 
 /***/ })
 
