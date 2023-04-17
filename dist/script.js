@@ -136,15 +136,19 @@ class VideoPlayer {
   bindTriggers() {
     this.btns.forEach(btn => {
       btn.addEventListener("click", () => {
-        const path = btn.getAttribute("data-url");
-        this.createPlayer(path);
-        this, player.stopVideo();
+        if (document.querySelector("iframe#frame")) {
+          this.overlay.style.display = "flex";
+        } else {
+          const path = btn.getAttribute("data-url");
+          this.createPlayer(path);
+        }
       });
     });
   }
   bindCloseBtn() {
     this.close.addEventListener("click", () => {
       this.overlay.style.display = "none";
+      this.player.stopVideo();
     });
   }
   init() {
