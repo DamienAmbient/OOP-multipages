@@ -5,12 +5,24 @@ export default class MiniSlider extends Slider {
         super(container, next, prev);
     }
 
+    bindTriggers() {
+        this.next.addEventListener("click", () => {
+            this.container.appendChild(this.slides[0]);
+        });
+        this.prev.addEventListener("click", () => {
+            let active = this.slides[this.slides.length - 1];
+            this.container.insertBefore(active, this.slides);
+        });
+    }
+
     init() {
         this.container.style.cssText = `
-       display:flex;
-flex-wrap: wrap;
-overflow: hidden;
-align-items:flex-start
+        display:flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        align-items:flex-start
        `;
+
+        this.bindTriggers();
     }
 }
