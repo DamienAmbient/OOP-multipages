@@ -10,6 +10,8 @@ window.addEventListener("DOMContentLoaded", () => {
         container: ".showup__content-slider",
         prev: ".showup__prev",
         next: ".showup__next",
+        activeClass: "card-active",
+        animate: true,
     });
     showUpSlider.init();
 
