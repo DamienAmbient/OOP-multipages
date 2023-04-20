@@ -99,6 +99,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider_slider_mini__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider/slider-mini */ "./src/js/modules/slider/slider-mini.js");
 /* harmony import */ var _modules_playVideo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/playVideo */ "./src/js/modules/playVideo.js");
 /* harmony import */ var _modules_difference__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/difference */ "./src/js/modules/difference.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+
 
 
 
@@ -136,6 +138,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const player = new _modules_playVideo__WEBPACK_IMPORTED_MODULE_2__["default"](".showup .play", ".overlay");
   player.init();
   new _modules_difference__WEBPACK_IMPORTED_MODULE_3__["default"](".officerold", ".officernew", ".officer__card-item").init();
+  new _modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"](".form").init();
 });
 
 /***/ }),
@@ -183,6 +186,60 @@ class Difference {
     this.hideItems(this.newItems);
     this.bindTriggers(this.oldOfficer, this.oldItems, this.oldCounter);
     this.bindTriggers(this.newOfficer, this.newItems, this.newCounter);
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/forms.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/forms.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Form; });
+class Form {
+  constructor(form) {
+    this.forms = document.querySelectorAll(form);
+    this.inputs = document.querySelectorAll("input");
+    this.message = {
+      loading: "Loading",
+      success: "Thank you! Soon we will contact with you",
+      failure: "SOmething is wrong"
+    };
+    this.path = "assets/question.php";
+  }
+  async postData(url, data) {
+    let res = await fetch(url, {
+      method: "POST",
+      body: data
+    });
+    return await res.text();
+  }
+  init() {
+    this.forms.forEach(item => {
+      item.addEventListener("submit", e => {
+        e.preventDefault();
+        let statusMEssage = document.createElement("div");
+        statusMEssage.style.cssText = `
+                    margin-top:15px;
+                    font-size:18px;
+                    color:white;
+                `;
+        item.parentNode.appendChild(statusMEssage);
+        statusMEssage.textContent = this.message.loading;
+        const formData = new FormData(item);
+        this.postData(this.path, formData).then(res => {
+          console.log(res);
+          statusMEssage.textContent = this.message.success;
+        }).catch(() => {
+          statusMEssage.textContent = this.message.failure;
+        });
+      });
+    });
   }
 }
 
