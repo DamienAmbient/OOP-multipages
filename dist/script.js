@@ -100,6 +100,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_playVideo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/playVideo */ "./src/js/modules/playVideo.js");
 /* harmony import */ var _modules_difference__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/difference */ "./src/js/modules/difference.js");
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_showInfo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showInfo */ "./src/js/modules/showInfo.js");
+
 
 
 
@@ -144,6 +146,7 @@ window.addEventListener("DOMContentLoaded", () => {
   new _modules_playVideo__WEBPACK_IMPORTED_MODULE_2__["default"](".module__video-item .play", ".overlay").init();
   new _modules_difference__WEBPACK_IMPORTED_MODULE_3__["default"](".officerold", ".officernew", ".officer__card-item").init();
   new _modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"](".form").init();
+  new _modules_showInfo__WEBPACK_IMPORTED_MODULE_5__["default"](".plus__content").init();
 });
 
 /***/ }),
@@ -403,6 +406,33 @@ class VideoPlayer {
       this.bindTriggers();
       this.bindCloseBtn();
     }
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/showInfo.js":
+/*!************************************!*\
+  !*** ./src/js/modules/showInfo.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ShowInfo; });
+class ShowInfo {
+  constructor(triggers) {
+    this.btns = document.querySelectorAll(triggers);
+  }
+  init() {
+    this.btns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const sibling = btn.closest(".module__info-show").nextElementSibling;
+        sibling.classList.toggle("msg");
+        sibling.style.marginTop = "20px";
+      });
+    });
   }
 }
 
