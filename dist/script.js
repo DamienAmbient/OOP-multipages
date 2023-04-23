@@ -101,6 +101,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_difference__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/difference */ "./src/js/modules/difference.js");
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_showInfo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showInfo */ "./src/js/modules/showInfo.js");
+/* harmony import */ var _modules_download__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/download */ "./src/js/modules/download.js");
+
 
 
 
@@ -147,6 +149,7 @@ window.addEventListener("DOMContentLoaded", () => {
   new _modules_difference__WEBPACK_IMPORTED_MODULE_3__["default"](".officerold", ".officernew", ".officer__card-item").init();
   new _modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"](".form").init();
   new _modules_showInfo__WEBPACK_IMPORTED_MODULE_5__["default"](".plus__content").init();
+  new _modules_download__WEBPACK_IMPORTED_MODULE_6__["default"](".download").init();
 });
 
 /***/ }),
@@ -198,6 +201,41 @@ class Difference {
       this.bindTriggers(this.oldOfficer, this.oldItems, this.oldCounter);
       this.bindTriggers(this.newOfficer, this.newItems, this.newCounter);
     } catch (e) {}
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/download.js":
+/*!************************************!*\
+  !*** ./src/js/modules/download.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Download; });
+class Download {
+  constructor(triggers) {
+    this.btns = document.querySelectorAll(triggers);
+    this.path = "assets/img/mainbg.jpg";
+  }
+  downloadItem(path) {
+    const element = document.createElement("a");
+    element.setAttribute("href", path);
+    element.setAttribute("download", "nice_picture");
+    element.style.display = "none";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
+  init() {
+    this.btns.forEach(item => {
+      item.addEventListener("click", () => {
+        this.downloadItem(this.path);
+      });
+    });
   }
 }
 
